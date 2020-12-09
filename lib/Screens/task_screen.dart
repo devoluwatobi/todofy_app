@@ -4,22 +4,10 @@ import 'package:todofy_app/Models/task_data.dart';
 import 'package:todofy_app/Widgets/add_task.dart';
 import 'package:todofy_app/Widgets/task_list.dart';
 
-class TaskScreen extends StatefulWidget {
-  @override
-  _TaskScreenState createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
-  void addNewTask(String title) {
-    //   setState(() {
-    //     Provider.of<TaskData>(context).tasks.add(Task(name: title));
-    // });
-    Navigator.pop(context);
-  }
-
+class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var tasks = Provider.of<TaskData>(context).tasks;
+    var taskData = Provider.of<TaskData>(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
@@ -69,7 +57,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   height: 10,
                 ),
                 Text(
-                  '${tasks.length} New Tasks',
+                  '${taskData.taskCount} New Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18,

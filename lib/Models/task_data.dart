@@ -13,4 +13,8 @@ class TaskData with ChangeNotifier {
     tasks.add(newTask);
     notifyListeners();
   }
+
+  get taskCount {
+    return tasks.length;
+  }
 }
