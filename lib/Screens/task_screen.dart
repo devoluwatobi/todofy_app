@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todofy_app/Models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:todofy_app/Models/task_data.dart';
 import 'package:todofy_app/Widgets/add_task.dart';
 import 'package:todofy_app/Widgets/task_list.dart';
 
@@ -9,21 +10,16 @@ class TaskScreen extends StatefulWidget {
 }
 
 class _TaskScreenState extends State<TaskScreen> {
-  List<Task> tasks = [
-    Task(name: 'Wake Up'),
-    Task(name: 'Brush Teeth'),
-    Task(name: 'Take Bath'),
-  ];
-
   void addNewTask(String title) {
-    setState(() {
-      tasks.add(Task(name: title));
-    });
+    //   setState(() {
+    //     Provider.of<TaskData>(context).tasks.add(Task(name: title));
+    // });
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
+    var tasks = Provider.of<TaskData>(context).tasks;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
@@ -31,9 +27,7 @@ class _TaskScreenState extends State<TaskScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTask(
-              addTaskCallback: addNewTask,
-            ),
+            builder: (context) => AddTask(),
           );
         },
       ),
@@ -94,7 +88,7 @@ class _TaskScreenState extends State<TaskScreen> {
                   topRight: Radius.circular(20),
                 ),
               ),
-              child: TaskList(tasks),
+              child: TaskList(),
             ),
           )
         ],

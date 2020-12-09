@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todofy_app/Models/task.dart';
+import 'package:todofy_app/Models/task_data.dart';
 
 String newTaskTitle;
 
 class AddTask extends StatelessWidget {
-  final Function addTaskCallback;
-
-  AddTask({this.addTaskCallback});
-
   @override
   Widget build(BuildContext context) {
+    var tasks = Provider.of<TaskData>(context, listen: false);
     return Container(
       color: Color(0xFF757575),
       child: Container(
@@ -43,8 +43,9 @@ class AddTask extends StatelessWidget {
             FlatButton(
               onPressed: () {
                 if (newTaskTitle != null) {
-                  addTaskCallback(newTaskTitle);
+                  tasks.addNewTask(Task(name: newTaskTitle));
                   newTaskTitle = null;
+                  Navigator.pop(context);
                 }
               },
               child: Text(
