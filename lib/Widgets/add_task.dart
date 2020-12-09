@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todofy_app/Models/task.dart';
 import 'package:todofy_app/Models/task_data.dart';
 
 String newTaskTitle;
@@ -43,7 +42,7 @@ class AddTask extends StatelessWidget {
             FlatButton(
               onPressed: () {
                 if (newTaskTitle != null) {
-                  tasks.addNewTask(Task(name: newTaskTitle));
+                  tasks.addNewTask(newTaskTitle);
                   newTaskTitle = null;
                   Navigator.pop(context);
                 }
