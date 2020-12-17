@@ -3,12 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:todofy_app/Models/task_data.dart';
 import 'package:todofy_app/Widgets/task_tile.dart';
 
-class TaskList extends StatefulWidget {
+class TaskList extends StatelessWidget {
   @override
-  _TaskListState createState() => _TaskListState();
-}
-
-class _TaskListState extends State<TaskList> {
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(builder: (context, taskData, child) {
@@ -18,10 +14,11 @@ class _TaskListState extends State<TaskList> {
           return TaskTile(
             taskTitle: tasks[index].name,
             isChecked: tasks[index].isDone,
-            checkBoxCallBack: (checkBoxState) {
-              setState(() {
-                tasks[index].toggleDone();
-              });
+            checkBoxCallBack: () {
+              taskData.updateTask(tasks[index]);
+            },
+            longPressCallBack: () {
+              taskData.deleteTask(tasks[index]);
             },
           );
         },

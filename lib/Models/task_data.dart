@@ -24,4 +24,18 @@ class TaskData with ChangeNotifier {
   UnmodifiableListView<Task> get tasks {
     return UnmodifiableListView(_tasks);
   }
+
+  void deleteTask(Task task) {
+    _tasks.remove(task);
+    notifyListeners();
+  }
+
+  void updateTask(Task task) {
+    task.toggleDone();
+    notifyListeners();
+    // Future.delayed(const Duration(milliseconds: 800), () {
+    //   _tasks.remove(task);
+    //   notifyListeners();
+    // });
+  }
 }
